@@ -1,0 +1,60 @@
+/*      babel config file        */
+
+*  yarn add babel-core@6.25.0 babel-loader@7.1.1
+create .babelrc file and add the followings:
+--------
+{
+    "presets": [
+        "env",
+        "react"
+    ]
+    // plugin here
+}
+-----
+* yarn add babel-plugin-transform-class-properties
+adding a babel plugin -- transform-class-properties
+---------
+{
+    // presets here
+    "plugin": [
+        "transform-class-properties",
+    ]
+}
+
+/*      webpack config file       */
+
+--------
+* yarn add babel-loader babel-core sass-loader node-sass
+add followings to webpack config file to load the babel-loader, sass-loader(dependency: node-sass)
+--------
+module: {
+        rules: [{
+            loader: 'babel-loader',
+            test: /\.js$/,
+            exclude: /node_modules/
+        },{
+            test: /\.s?css$/,
+            use : [
+                'style-loader',
+                'css-loader',
+                'sass-loader'
+            ]
+        }]
+    }
+----------
+add following to webpack config file to know the exact error location using source map
+----------
+Note: This is just for development(not for production)
+devtool: 'cheap-module-eval-source-map'
+----------
+*  yarn add react@16.0.0 react-dom@16.0.0
+------------
+import React from 'react'
+import ReactDOM from 'react-dom'
+--------
+* yarn add webpack-dev-server
+---- Add it inside the module export object ----
+devServer: {
+    contentBase: path.join(__dirname, 'public')
+}
+--------
